@@ -255,7 +255,7 @@ Ativar syntax highlighting no nano
 pacman -Syu steam
 
 cd $HOME && sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si # instalar yay
-yay -Syu discord-canary libunity plasma6-applets-panel-colorizer visual-studio-code-bin epson-inkjet-printer-202101w kdotool
+yay -Syu discord-canary libunity visual-studio-code-bin epson-inkjet-printer-202101w kdotool
 
 sudo tailscale up # para conectar na rede do tailscale
 ```
@@ -298,9 +298,6 @@ reiniciar
 * definir ícone de conta (katy_snap)
 
 Se uma partição NTFS não montar falando que o "arquivo não existe", é bom usar `sudo ntfsfix /dev/sdb2` (sendo `dev/sdb2` a partição)
-
-* No panel colorizer, usar #def0f9
-
 Para o git guardar as credencials, use `git config --global core.askPass /usr/bin/ksshaskpass`, assim as credenciais serão guardadas na wallet do KDE
 
 Para a senha, crie um Personal access token no GitHub
