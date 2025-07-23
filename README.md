@@ -205,7 +205,7 @@ Trocar tudo para `1` ao invés de `2` (mais informações: https://wiki.archlinu
 
 Deixar o terminal bonitin (Power Style)
 
-`nano /.bashrc`
+`nano ~/.bashrc`
 
 (Não se esqueça de remover/comentar o PS1 que já vem por padrão!!)
 
