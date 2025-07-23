@@ -79,14 +79,13 @@ reboot
 * `tuned`: Sistema de energia
 * `kcalc`: Calculadora do KDE
 * `plasma-systemmonitor`: "Gerenciador de Tarefas" do KDE
-* `vlc`: VLC oxente
+* `vlc vlc-plugins-all`: VLC + "Plugins" (Codecs) para o VLC
 * `flatpak-kcm`: Permite configurar as permissões de apps Flatpak
 * `dosfstools`: Usado para poder editar partições FAT16 no KDE Partition Manager
 * `pkgstats`: Envia estatísticas dos pacotes instalados para o Arch Linux
 * `yt-dlp`: Ferramenta para baixar vídeos do YouTube pelo terminal
 * `wl-clipboard`: Ferramenta para interagir com o clipboard pelo terminal (Wayland)
 * `sshfs`: Ferramenta para montar um servidor SSH como se fosse uma pasta local, também é necessário pelo KDE Connect para montar celulares conectados
-* `vlc-plugins-all`: Codecs para o VLC
 * `pacman-contrib`: Scripts e ferramentas para o pacman, usado para o `paccache.timer`, que automaticamente limpa o cache do pacman 
 
 **Notas:**
