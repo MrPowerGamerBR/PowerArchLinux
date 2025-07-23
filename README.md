@@ -10,7 +10,7 @@ Você NÃO deve seguir este guia a risca se o seu nome não for "MrPowerGamerBR"
 
 ## Por que usar Linux ao invés do Windows?
 
-Eu uso Linux em servidores a 10+ anos, mas em desktops eu sempre gostei do Windows. Windows sempre foi "just works™"...
+Eu uso Linux em servidores a 10+ anos, mas em desktops eu sempre gostei do Windows. Eu já usei Linux no desktop no passado (Xubuntu), mas apenas quando o meu sistema era *tão ruim* ao ponto de ser inviável de usar Windows... Para mim, Windows sempre foi "just works™". 
 
 Mas o primeiro "rude awakening" foi quando a Microsoft começou a achar que era uma boa ideia começar a enfiar propagandas no Windows. Não, eu não quero OneDrive. Não, eu não quero usar o Copilot. Não, eu não quero conectar uma conta da Microsoft. Não, eu não quero comprar o pacote Office. Não, eu não quero instalar o TikTok. Eu só quero mexer no meu computador!
 
@@ -22,7 +22,7 @@ As propagandas são apenas os ossos do ofício, você engole elas pois não tem 
 
 Mas infelizmente a realidade é que **largar o Windows 100% ainda é inviável**, mas você não precisa largar o Windows 100%, você pode fazer dual boot para os jogos que só rodam no Windows (VALORANT) ou usar outro computador/laptop e acessar ele remotamente para usar os apps que só rodam no Windows.
 
-* [How I Broke up with Adobe](https://youtu.be/lm51xZHZI6g)
+* [How I Broke up with Adobe](https://youtu.be/lm51xZHZI6g) (este foi o vídeo que colocou a semente na minha cabeça de "e se eu realmente usar Linux no desktop")
 * [I installed Linux (so should you)](https://youtu.be/pVI_smLgTY0)
 * [the windows taskbar is a UX nightmare...](https://youtu.be/wA_jroxKpao)
 
