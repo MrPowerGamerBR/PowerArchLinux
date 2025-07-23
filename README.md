@@ -102,9 +102,9 @@ reboot
 * Desativar suspender na seção de energia das configurações (pois crasha o KWin - talvez isso arrumaria? https://www.reddit.com/r/kde/comments/1i4w7q9/kde_plasma_crashes_after_wake_from_sleep_state/)
 * Bloqueio de Tela -> Nunca
 * Trocar cursor do KDE para o Breeze Light, tamanho do cursor do KDE para 30 ao invés de 24
-* Dolphin -> Botão direito 
 * Dolphin -> Mostrar arquivos ocultos
-* Dolphin -> Configurar Dolphin -> Manter uma janela única do Dolphin
+* Dolphin -> Configurar Dolphin -> Interface -> Manter uma janela única do Dolphin
+* Dolphin -> Configurar Dolphin -> Interface -> Mostrar o caminho completo na barra de título
 * Animações -> Velocidade praticamente insantânea, desativar animações
 * Bordas da Tela -> Desativar peek (top esquerdo) e desativar barreira de borda
 * KRunner -> Colocar para centralizar, colocar para que pesquisa de janelas tenha prioridade
@@ -114,7 +114,9 @@ reboot
 * Mouse -> velocidade -0.96, velocidade de rolagem um pouco acima do normal
 * Sessão da Área de Trabalho -> Iniciar com uma sessão vazia
 * Tela de Autenticação -> Comportamento -> Configurar login automático
-* Ativar o KWin de minimizar tudo no "Scripts do KWin", configurar para Win + D
+* Atalhos -> Spectacle -> Iniciar -> CTRL + Print Screen
+* Atalhos -> Spectacle -> Capturar o Monitor Atual -> Print Screen 
+* Ativar o KWin de minimizar tudo no "Scripts do KWin", configurar para Win + D no app de "Atalhos"
     * Para mim isso é mais natural que a tecla padrão de "espiar desktop", pois o "espiar desktop" não faz as janelas maximizarem novamente ao clicar em qualquer uma delas
 * Cores -> Cor de destaque personalizada -> #29a6fe
 
