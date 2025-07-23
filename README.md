@@ -56,7 +56,7 @@ Outra vantagem do KDE Plasma é que ele é *muito* customizável. Ele tem muitas
 
 Não sei.
 
-![https://c.tenor.com/yDZryWCEP-cAAAAC/tenor.gif](https://c.tenor.com/yDZryWCEP-cAAAAC/tenor.gif)
+![https://c.tenor.com/yDZryWCEP-cAAAAd/tenor.gif](https://c.tenor.com/yDZryWCEP-cAAAAd/tenor.gif)
 
 ## Instalação do Arch Linux
 
