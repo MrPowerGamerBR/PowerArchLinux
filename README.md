@@ -8,6 +8,56 @@ Eu deixo o meu guia público para outras pessoas verem e aprenderem coisas novas
 
 Você NÃO deve seguir este guia a risca se o seu nome não for "MrPowerGamerBR", já que ele foi moldado para o meu sistema e ele tem várias coisas que você não vai querer e nem vão funcionar no seu sistema. Se você quer instalar Arch Linux, você deve [instalar ele seguindo o guia](https://wiki.archlinux.org/title/Installation_guide). Entretanto, talvez o guia tenha algumas coisas novas que você não sabia. :3
 
+## Por que usar Linux ao invés do Windows?
+
+Eu uso Linux em servidores a 10+ anos, mas em desktops eu sempre gostei do Windows. Windows sempre foi "just works™"...
+
+Mas o primeiro "rude awakening" foi quando a Microsoft começou a achar que era uma boa ideia começar a enfiar propagandas no Windows. Não, eu não quero OneDrive. Não, eu não quero usar o Copilot. Não, eu não quero conectar uma conta da Microsoft. Não, eu não quero comprar o pacote Office. Não, eu não quero instalar o TikTok. Eu só quero mexer no meu computador!
+
+É possível filtrar essas propagandas do Windows se você mexer no registro do Windows e instalar o Windows na região "US (World)", mas na minha opinião essas coisas *não* deveriam existir no sistema operacional para começo de conversa.
+
+Claro, tem o argumento que se você não paga pelo Windows você não deveria reclamar que ele tem essas propagandas forçadas. Mas o motivo de eu não pagar pelo Windows é *justamente* porque eu sei que, mesmo se eu pagar, o Windows irá continuar do mesmo jeito! E eu sei disso pois eu tenho um laptop que veio com o Windows 11 (ou seja, é uma licença oficial) e ele tem essas mesmas propagandas.
+
+As propagandas são apenas os ossos do ofício, você engole elas pois não tem alternativas... Mas quando o Windows começou a ter problemas que [afetam funções simples do sistema, como trocar pastas](https://x.com/MrPowerGamerBR/status/1947693425060417972), foi o momento que eu fiquei frustrado o suficiente para querer migrar para Linux.
+
+Mas infelizmente a realidade é que **largar o Windows 100% ainda é inviável**, mas você não precisa largar o Windows 100%, você pode fazer dual boot para os jogos que só rodam no Windows (VALORANT) ou usar outro computador/laptop e acessar ele remotamente para usar os apps que só rodam no Windows.
+
+* [How I Broke up with Adobe](https://youtu.be/lm51xZHZI6g)
+* [I installed Linux (so should you)](https://youtu.be/pVI_smLgTY0)
+* [the windows taskbar is a UX nightmare...](https://youtu.be/wA_jroxKpao)
+
+E eu não sei se é apenas placebo, mas para mim Linux roda MUITO mais "snappy" do que o Windows.
+
+## Por que usar Arch Linux ao invés de *insira distro aqui*?
+
+Uma vantagem para mim é que o Arch Linux é bleeding edge, ou seja, ele é uma das distros mais atualizadas que você pode ter. Isso é vantajoso para hardwares que também são bleeding edge, como, por exemplo, placas de vídeo da Nvidia.
+
+Claro, um dos problemas do Arch é que as vezes é *chato* você ter que descobrir como fazer a coisa xyzabc funcionar, e ter que ficar lendo qual package usar e ter paralisia de escolha tentando entender quais são as vantagens e desvantagens de cada uma. Mas ao mesmo tempo isso é uma vantagem, pois você sabe as vantagens e desvantagens de tudo que você está instalando!
+
+Arch é meio chato de instalar, já que você tem que usar o terminal para instalar o sistema operacional, mas depois de instalado ele funciona igual a qualquer outra distro. Como eu já uso Linux em servidores e pelo WSL há anos, eu não tenho uma aversão ao terminal. Na realidade, eu amo o terminal e amo ele *noms the terminal*. (mas ao mesmo tempo eu gosto de uma GUI, pois uma GUI ajuda a descobrir coisas que você *não* conhece)
+
+Outra *grande* vantagem do Arch Linux é o AUR (Arch User Repository), onde lá tem várias packages feitas por usuário que você pode instalar. Se algo não existe nos repositórios oficiais, ela provavelmente vai existir no AUR.
+
+Sinceramente, no final Linux é tudo igual, o que muda é apenas o sistema de packaging. Você não é menos "usuário de Linux" só porque você usa Linux Mint ou Ubuntu, e você não é mais "usuário de Linux" só porque você fez a sua própria distro pelo Linux from Scratch. Essa é a beleza do Linux, você pode usar as coisas do jeito que *você* quiser.
+
+E vamos ser sinceros, se o PewDiePie usa Arch Linux, você também consegue.
+
+## Por que usar KDE Plasma ao invés de *insira DE aqui*?
+
+Eu gosto do KDE Plasma pois ele é o Desktop Environment mais parecido com o jeito que o Windows funciona. Eu gosto do jeito que o Windows funciona, o que eu não gosto é do jeito que o Windows 11 funciona *atualmente*.
+
+Enquanto muitas pessoas (ThePrimeagen, DHH, etc) espalham a palavra dos tiling managers (Hyprland) e como eles são muito úteis para otimizar o seu trabalho, mas na minha experiência eu acabo preferindo muito mais um stacking window manager do que o tiling window manager. Mas isso varia de pessoa para pessoa!
+
+Para mim, a parte legal de tiling managers é a parte de "fast switch" de aplicativos, de você ter vários "desktops" e poder ficar alternando entre eles rapidamente. Se você é como eu e é isso que te intriga em tiling managers, você pode fazer a mesma coisa no KDE Plasma usando o [kdotool](https://github.com/jinliu/kdotool) ou até mesmo um [script do KWin](https://www.reddit.com/r/kde/comments/1jr0dn4/maximizing_a_window_via_kwin_script/mpw5src/) para automaticamente maximizar e colocar em foco o app que você deseja ao usar um atalho.
+
+Outra vantagem do KDE Plasma é que ele é *muito* customizável. Ele tem muitas opções de personalização para deixar o seu desktop da maneira que você quiser.
+
+## Por que você escreveu as suas motivações e as suas escolhas, se o guia é para você mesmo?
+
+Não sei.
+
+![https://media1.tenor.com/m/yDZryWCEP-cAAAAC/meow-cat.gif](https://media1.tenor.com/m/yDZryWCEP-cAAAAC/meow-cat.gif)
+
 ## Instalação do Arch Linux
 
 O nome do ID do GRUB é "ArchLinuxGRUBInsecure" para indicar que é sem suporte secure boot. Eu uso a tela de seleção de OS da minha placa mãe, então eu não preciso iniciar o Windows pelo GRUB.
@@ -204,13 +254,14 @@ Ativar syntax highlighting no nano
 pacman -Syu steam
 
 cd $HOME && sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si # instalar yay
-yay -Syu discord-canary libunity plasma6-applets-panel-colorizer visual-studio-code-bin epson-inkjet-printer-202101w
+yay -Syu discord-canary libunity plasma6-applets-panel-colorizer visual-studio-code-bin epson-inkjet-printer-202101w kdotool
 
 sudo tailscale up # para conectar na rede do tailscale
 ```
 
 **Explicação das Packages:**
 * `epson-inkjet-printer-202101w`: Driver da Impressora EPSON L3210
+* `kdotool`: Ferramenta para poder interagir com janelas do KWin pelo terminal, similar ao `xdotool`.
 
 Corrigir as unread notification badges do Discord Canary: `cp /usr/share/applications/discord-canary.desktop ~/.local/share/applications/discord.desktop && update-desktop-database ~/.local/share/applications/`
 
