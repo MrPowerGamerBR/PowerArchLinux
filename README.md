@@ -309,6 +309,14 @@ Para configurar a impressora, é melhor usar a ferramenta de configuração do K
 
 Atalhos que o Wine cria ficam no `/home/mrpowergamerbr/.local/share/applications/`
 
+Instalar o [PowerBreeze](https://github.com/MrPowerGamerBR/PowerBreeze/):
+
+```
+cd $HOME/.local/share/plasma/desktoptheme/ && git clone https://github.com/MrPowerGamerBR/PowerBreeze/
+```
+
+E depois altere para o PowerBreeze no tema do Plasma.
+
 ## Regras das Janelas
 
 Eu gosto do jeito que o Picture-in-Picture do Firefox funciona no Windows, onde o Picture-in-Picture sempre fica no topo de qualquer janela e sempre fica presente na tela mesmo ao usar `Windows + D`.
