@@ -265,7 +265,7 @@ sudo tailscale up # para conectar na rede do tailscale
 
 Corrigir as unread notification badges do Discord Canary: `cp /usr/share/applications/discord-canary.desktop ~/.local/share/applications/discord.desktop && update-desktop-database ~/.local/share/applications/`
 
-instalar a fonte <https://github.com/jacobxperez/lexica-ultralegible> e ativar ela no sistema (ou qualquer fonte otf, pois de acordo com pesquisas fontes OTF renderizam melhor em apps QT)
+Instalar a fonte <https://github.com/jacobxperez/lexica-ultralegible> e ativar ela no sistema, pois [Fontes OTF renderizam de forma mais "crispy"/melhor em apps Qt](https://www.reddit.com/r/linux/comments/1b1jasr/exploring_font_rendering_a_comparative_journey/ksfoq86/).
 
 ```
 sudo mkdir -p /usr/local/share/fonts/l/
