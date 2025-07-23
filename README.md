@@ -91,6 +91,7 @@ systemctl enable cups.service
 systemctl enable fstrim.timer
 systemctl enable tuned-ppd.service
 systemctl enable pkgstats.timer
+systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
 systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
 systemctl enable reflector.timer
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
