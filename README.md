@@ -2,7 +2,7 @@
 
 Um guia de como instalar o Arch Linux da maneira que eu (MrPowerGamerBR) gosto, feito exclusivamente para o MrPowerGamerBR usar quando instalar o Arch Linux.
 
-Eu não considero uma instalação do Arch Linux a "definitiva", você sempre vai querer reinstalar tudo do zero pois "desta vez é a vez definitiva!" para, no final, reinstalar tudo de novo depois. A realidade é que a instalação "definitiva" irá chegar com o tempo.
+Eu não considero uma instalação do Arch Linux a "definitiva". Toda hora eu penso "eu vou tentar fazer coisas novas no meu sistema e não me importo se ele quebrar" para assim eu acabar aprendendo novas coisas com o que você fez, para depois reinstalar (agora com as novas coisas que você aprendeu) e pensar "desta vez é para valer!" para, no final, reinstalar tudo de novo depois. A realidade é que a instalação "definitiva" irá chegar com o tempo.
 
 Eu deixo o meu guia público para outras pessoas verem e aprenderem coisas novas. Eu sempre gosto de procurar "what are your must have packages Arch Linux" no Google para ver o que as outras pessoas recomendam, e nada mais justo que postar o que *eu recomendo* para outras pessoas verem.
 
@@ -18,7 +18,7 @@ mkfs.ext4 /dev/nvme0n1p4
 mount /dev/nvme0n1p4 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/efi
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode reflector nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip fastfetch less rsync firefox flatpak plasma-meta kde-system kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers  phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd tuned kcalc sddm konsole ark kwalletmanager ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode reflector nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip fastfetch less rsync firefox flatpak plasma-meta kde-system kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd tuned kcalc sddm konsole ark kwalletmanager ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
