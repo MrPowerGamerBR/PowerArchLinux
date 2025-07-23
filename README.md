@@ -44,9 +44,9 @@ E vamos ser sinceros, se o PewDiePie usa Arch Linux, você também consegue.
 
 ## Por que usar KDE Plasma ao invés de *insira DE aqui*?
 
-Eu gosto do KDE Plasma pois ele é o Desktop Environment mais parecido com o jeito que o Windows funciona. Eu gosto do jeito que o Windows funciona, o que eu não gosto é do jeito que o Windows 11 funciona *atualmente*.
+Eu gosto do KDE Plasma pois ele é o Desktop Environment mais parecido com o jeito que o Windows funciona. Eu uso o Windows desde o [Windows 98 SE](https://youtu.be/QQFjrS_Oxq4) e eu sempre gostei do jeito que o Windows funciona. O problema do Windows não é o desktop environment, o problema é o jeito que o Windows 11 está decaíndo sem ter uma luz no fim do túnel.
 
-Enquanto muitas pessoas (ThePrimeagen, DHH, etc) espalham a palavra dos tiling managers (Hyprland) e como eles são muito úteis para otimizar o seu trabalho, mas na minha experiência eu acabo preferindo muito mais um stacking window manager do que o tiling window manager. Mas isso varia de pessoa para pessoa!
+Enquanto muitas pessoas (ThePrimeagen, DHH, etc) espalham a palavra dos tiling managers (Hyprland) e como eles são muito úteis para otimizar o seu trabalho, mas na minha experiência eu acabo preferindo muito mais um stacking window manager do que o tiling window manager. Mas isso varia de pessoa para pessoa! Novamente, essa é uma das belezas do Linux, você pode usar o seu desktop da maneira que *você* quiser.
 
 Para mim, a parte legal de tiling managers é a parte de "fast switch" de aplicativos, de você ter vários "desktops" e poder ficar alternando entre eles rapidamente. Se você é como eu e é isso que te intriga em tiling managers, você pode fazer a mesma coisa no KDE Plasma usando o [kdotool](https://github.com/jinliu/kdotool) ou até mesmo um [script do KWin](https://www.reddit.com/r/kde/comments/1jr0dn4/maximizing_a_window_via_kwin_script/mpw5src/) para automaticamente maximizar e colocar em foco o app que você deseja ao usar um atalho.
 
