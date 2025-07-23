@@ -68,7 +68,7 @@ mkfs.ext4 /dev/nvme0n1p4
 mount /dev/nvme0n1p4 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/efi
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode reflector nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip fastfetch less rsync firefox flatpak plasma-meta kde-system kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd tuned kcalc sddm konsole ark kwalletmanager ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode reflector nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip fastfetch less rsync firefox flatpak plasma-meta kde-system kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd tuned kcalc sddm konsole ark kwalletmanager ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -115,6 +115,7 @@ reboot
 * `reflector`: Para poder atualizar mirrors do Arch
 * `cups cups-pdf system-config-printer`: Suporte para impressora
 * `krita`: App de desenho/edição de imagem
+* `inkscape`: App de ilustração SVG
 * `kdialog`: Permite enviar notificações do KDE Plasma pelo terminal
 * `kimageformats`: Adiciona thumbnails no Dolphin para AVIF, JPEG XL, etc
 * `dolphin-plugins`: Adiciona plugins no Dolphin, como montar ISOs
