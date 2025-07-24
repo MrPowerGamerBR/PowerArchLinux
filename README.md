@@ -257,7 +257,7 @@ Ativar syntax highlighting no nano
 pacman -Syu steam
 
 cd $HOME && sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si # instalar yay
-yay -Syu discord-canary libunity visual-studio-code-bin epson-inkjet-printer-202101w kdotool
+yay -Syu discord-canary visual-studio-code-bin epson-inkjet-printer-202101w kdotool
 
 sudo tailscale up # para conectar na rede do tailscale
 ```
@@ -265,8 +265,6 @@ sudo tailscale up # para conectar na rede do tailscale
 **Explicação das Packages:**
 * `epson-inkjet-printer-202101w`: Driver da Impressora EPSON L3210
 * `kdotool`: Ferramenta para poder interagir com janelas do KWin pelo terminal, similar ao `xdotool`.
-
-Corrigir as unread notification badges do Discord Canary: `cp /usr/share/applications/discord-canary.desktop ~/.local/share/applications/discord.desktop && update-desktop-database ~/.local/share/applications/`
 
 Instalar a fonte <https://github.com/jacobxperez/lexica-ultralegible> e ativar ela no sistema, pois [Fontes OTF renderizam de forma mais "crispy"/melhor em apps Qt](https://www.reddit.com/r/linux/comments/1b1jasr/exploring_font_rendering_a_comparative_journey/ksfoq86/).
 
@@ -329,6 +327,30 @@ Outra regra de janela que eu gosto de configurar é fazer que remova a title bar
 ![media/window_rules_discord.png](media/window_rules_discord.png)
 
 Claro, se você remover a title bar você não conseguirá mover o Discord já que a title bar do Discord não é "movível". Eu não preciso ficar movendo a janela do Discord, mas se por ventura você precisar, você pode temporariamente reativar ela clicando com botão direito no Discord na Taskbar -> Mais -> Desativar "Sem barra de título e moldura"
+
+## Badge de Notificações Unread no Discord Canary
+
+O problema é que o Discord hardcodeou o `discord.desktop` no código-fonte dele, então ele espera que o nome do app seja `discord.desktop` para as notificações funcionarem.
+
+```bash
+pacman -Syu libunity
+cp /usr/share/applications/discord-canary.desktop ~/.local/share/applications/discord.desktop && update-desktop-database ~/.local/share/applications/
+```
+
+E depois é necessário iniciar o Discord Canary pela sua versão. Um problema deste workaround é que toda hora que você atualizar o Discord Canary você tem que usar `update-desktop-database ~/.local/share/applications/`.
+
+## Electron Wayland
+
+`~/.config/electron-flags.conf`
+
+```
+--enable-features=WaylandWindowDecorations
+--ozone-platform-hint=auto
+```
+
+Nem todos os apps usam estas flags, entretanto elas são úteis para os apps Electron que respeitam essas flags.
+
+Isso também arruma uma coisa chata no Visual Studio Code onde ele fica rolando o conteúdo do arquivo aberto se o cursor está perto do topo/fundo da tela.
 
 ## Secure Boot
 
