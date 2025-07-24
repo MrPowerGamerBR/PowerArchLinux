@@ -214,6 +214,7 @@ Deixar o terminal bonitin (Power Style)
 ```bash
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
+source /usr/share/bash-completion/completions/git # autocomplete do git similar ao Git Bash do Windows
 
 parse_git_branch() {
     local branch
