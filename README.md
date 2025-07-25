@@ -62,13 +62,17 @@ Não sei.
 
 O nome do ID do GRUB é "ArchLinuxGRUBInsecure" para indicar que é sem suporte secure boot. Eu uso a tela de seleção de OS da minha placa mãe, então eu não preciso iniciar o Windows pelo GRUB.
 
+Para ficar mais fácil, a instalação é separada em fases, pois ninguém gosta de ficar vendo o terminal do Arch Linux esperando instalar tudo.
+
+A primeira parte é o "essencial" e depois de instalado, instala o resto.
+
 ```bash
 loadkeys br-abnt2
 mkfs.ext4 /dev/nvme0n1p4
 mount /dev/nvme0n1p4 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/efi
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode reflector nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip fastfetch less rsync firefox flatpak plasma-meta kde-system kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd tuned kcalc sddm konsole ark kwalletmanager ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole ark kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -85,26 +89,11 @@ passwd mrpowergamerbr # troca a senha do usuario MrPowerGamerBR
 pacman -Syu
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
-systemctl enable tailscaled.service
-systemctl enable docker.service
-systemctl enable cups.service
 systemctl enable fstrim.timer
-systemctl enable tuned-ppd.service
-systemctl enable pkgstats.timer
-systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
-systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
-systemctl enable reflector.timer
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
 nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
-nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
 grub-mkconfig -o /boot/grub/grub.cfg
-nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
 sudo cat /boot/grub/grub.cfg | grep ucode # ver se está com o ucode ativado
-nano /usr/lib/systemd/user.conf.d/00-process-timeouts.conf # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
-
-[Manager]
-DefaultTimeoutStopSec=5s
-
 exit
 
 # desconectar o monitor secundário (para o KDE reconhecer por padrão o monitor principal sem precisar mexer nos painéis manualmente)
@@ -173,6 +162,26 @@ reboot
 * Cores -> Cor de destaque personalizada -> #29a6fe
 
 No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe) com uma senha vazia, para não ficar pedindo o login do user quando abrir o Discord
+
+```bash
+nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
+nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
+
+pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
+
+systemctl enable --now cups.service
+systemctl enable --now tailscaled.service
+systemctl enable --now docker.service
+systemctl enable pkgstats.timer
+systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
+systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
+systemctl enable reflector.timer
+
+nano /usr/lib/systemd/user.conf.d/00-process-timeouts.conf # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
+
+[Manager]
+DefaultTimeoutStopSec=5s
+```
 
 Instalar Firefox Nightly em `/opt/firefox-nightly`
 
