@@ -134,6 +134,7 @@ reboot
 * `wl-clipboard`: Ferramenta para interagir com o clipboard pelo terminal (Wayland)
 * `sshfs`: Ferramenta para montar um servidor SSH como se fosse uma pasta local, também é necessário pelo KDE Connect para montar celulares conectados
 * `pacman-contrib`: Scripts e ferramentas para o pacman, usado para o `paccache.timer`, que automaticamente limpa o cache do pacman 
+* `bash-completion`: Vários arquivos para auto complete para o bash
 
 **Notas:**
 * `kio-gdrive`: Permite conectar o Google Drive e outros serviços no Dolphin, entretanto não está funcionando devido a problemas no OAuth2 do KDE (https://discuss.kde.org/t/kde-online-accounts-not-signing-in/3411/38)
@@ -173,7 +174,7 @@ No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe)
 nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
 nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
 
-pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all
+pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion
 
 systemctl enable --now cups.service
 systemctl enable --now tailscaled.service
@@ -230,6 +231,8 @@ Deixar o terminal bonitin (Power Style)
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 source /usr/share/bash-completion/completions/git # autocomplete do git similar ao Git Bash do Windows
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 
 parse_git_branch() {
     local branch
