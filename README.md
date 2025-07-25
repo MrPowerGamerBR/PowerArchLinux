@@ -90,6 +90,12 @@ pacman -Syu
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
 systemctl enable fstrim.timer
+fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
+swapon --show # verificar se o swap está funcionando
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
 nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
 grub-mkconfig -o /boot/grub/grub.cfg
