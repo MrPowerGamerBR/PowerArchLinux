@@ -154,18 +154,23 @@ reboot
 * Trocar cursor do KDE para o Breeze Light, tamanho do cursor do KDE para 30 ao invés de 24
 * Dolphin -> Mostrar arquivos ocultos
 * Dolphin -> Configurar Dolphin -> Interface -> Manter uma janela única do Dolphin
+* Dolphin -> Configurar Dolphin -> Mostrar ao Iniciar -> `/home/mrpowergamerbr`
 * Dolphin -> Configurar Dolphin -> Interface -> Mostrar o caminho completo na barra de título
+* Dolphin -> Configurar Dolphin -> Interface -> Barras de Localização e Status -> Mostrar o caminho completo na barra de localização
 * Animações -> Velocidade praticamente insantânea, desativar animações
 * Bordas da Tela -> Desativar peek (top esquerdo) e desativar barreira de borda
 * KRunner -> Colocar para centralizar, colocar para que pesquisa de janelas tenha prioridade
 * Painel -> Desativar que possa silenciar aplicações clicando no ícone
 * Painel -> Rolar em uma tarefa -> Não faz nada
 * Painel -> Clicar em tarefas agrupadas -> Exibir lista textual
+* Painel -> Desativar "Exibir visualizações em janelas pequenas quando passar o mouse sobre as tarefas"
 * Mouse -> velocidade -0.96, velocidade de rolagem um pouco acima do normal
 * Sessão da Área de Trabalho -> Iniciar com uma sessão vazia
 * Tela de Autenticação -> Comportamento -> Configurar login automático
 * Atalhos -> Spectacle -> Iniciar -> CTRL + Print Screen
 * Atalhos -> Spectacle -> Capturar o Monitor Atual -> Print Screen 
+* Spectacle -> Desativar "Incluir sombras da janela"
+* Spectacle -> Configurar Spectacle... -> "Salvar arquivo para a pasta padrão"
 * Ativar o KWin de minimizar tudo no "Scripts do KWin", configurar para Win + D no app de "Atalhos"
     * Para mim isso é mais natural que a tecla padrão de "espiar desktop", pois o "espiar desktop" não faz as janelas maximizarem novamente ao clicar em qualquer uma delas
 * Cores -> Cor de destaque personalizada -> #29a6fe
@@ -176,7 +181,7 @@ No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe)
 nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
 nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
 
-pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion tldr man-pages man-db
+pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker docker-compose unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion tldr man-pages man-db
 
 systemctl enable --now cups.service
 systemctl enable --now tailscaled.service
@@ -223,6 +228,8 @@ No Firefox `about:config`, ative para usar o XDG Desktop Portals (para usar o fi
 
 Trocar tudo para `1` ao invés de `2` (mais informações: https://wiki.archlinux.org/title/Firefox#XDG_Desktop_Portal_integration)
 
+Nas configurações do Firefox, ativar a "Rolagem Automática" (ativa o sistema de rolar com o botão do meio do mouse, igual como é no Windows)
+
 Deixar o terminal bonitin (Power Style)
 
 `nano ~/.bashrc`
@@ -230,6 +237,7 @@ Deixar o terminal bonitin (Power Style)
 (Não se esqueça de remover/comentar o PS1 que já vem por padrão!!)
 
 ```bash
+source /etc/environment
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 source /usr/share/bash-completion/completions/git # autocomplete do git similar ao Git Bash do Windows
@@ -334,6 +342,11 @@ cd $HOME/.local/share/plasma/desktoptheme/ && git clone https://github.com/MrPow
 
 E depois altere para o PowerBreeze no tema do Plasma.
 
+```bash
+git config --global user.email "git@mrpowergamerbr.com"
+git config --global user.name "MrPowerGamerBR"
+```
+
 ## Regras das Janelas
 
 Eu gosto do jeito que o Picture-in-Picture do Firefox funciona no Windows, onde o Picture-in-Picture sempre fica no topo de qualquer janela e sempre fica presente na tela mesmo ao usar `Windows + D`.
@@ -371,6 +384,14 @@ E depois é necessário iniciar o Discord Canary pela sua versão. Um problema d
 Nem todos os apps usam estas flags, entretanto elas são úteis para os apps Electron que respeitam essas flags.
 
 Isso também arruma uma coisa chata no Visual Studio Code onde ele fica rolando o conteúdo do arquivo aberto se o cursor está perto do topo/fundo da tela.
+
+## IntelliJ IDEA Wayland
+
+Para o IntelliJ IDEA, adicione o `-Dawt.toolkit.name=WLToolkit` nas configurações da VM do IDEA
+
+## Compilação de Coisas
+
+Se você quiser compilar coisas que não sejam Java/Kotlin/etc, instale o `cmake extra-cmake-modules`
 
 ## Secure Boot
 
