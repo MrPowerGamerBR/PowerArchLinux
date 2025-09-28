@@ -16,11 +16,11 @@ echo "Ativando multilib e color no pacman..."
 nano /etc/pacman.conf
 
 echo "Configurando reflector..."
-curl -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
+curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
 
 echo "Configurando fish..."
 mkdir -p /home/mrpowergamerbr/.config/fish/
-curl -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
+curl -L -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
 usermod -s /bin/fish mrpowergamerbr
 
 echo "Configurando serviços..."
