@@ -41,6 +41,8 @@ swapon /swapfile
 echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
 swapon --show # verificar se o swap está funcionando
 echo "Configurando GRUB..."
+rm -rf /efi/EFI/ArchLinuxGRUB
+rm -rf /efi/EFI/ArchLinuxGRUBInsecure
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
 nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
 grub-mkconfig -o /boot/grub/grub.cfg
