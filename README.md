@@ -74,7 +74,7 @@ mount --mkdir /dev/nvme0n1p1 /mnt/efi
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
 # Apenas o essencial é instalado aqui, é um "bootstrap" para primeiro instalar as coisas realmente essenciais para depois instalar as coisas menos essenciais
 # Assim é até melhor, pois evita você ficar muito tempo esperando instalar todas as packages enquanto você olha para um terminal
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono tailscale
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -93,12 +93,6 @@ systemctl enable NetworkManager.service
 systemctl enable sddm.service
 systemctl enable systemd-resolved.service
 systemctl enable fstrim.timer
-fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
-swapon --show # verificar se o swap está funcionando
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
 nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -147,6 +141,16 @@ reboot
 * `kcolorchooser`: Color picker, funciona mas seria legal uma alternativa que permite você dar pick sem precisar clicar no botão primeiro
 
 ### Após Reiniciar
+
+#### Ativar Swap
+```bash
+fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
+swapon --show # verificar se o swap está funcionando
+```
 
 * Colocar para dar migalhas de estatísticas/tracking para o KDE Plasma para ajudarem eles com o desenvolvimento <3
 * Monitor -> Escala 150%
