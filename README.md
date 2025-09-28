@@ -230,52 +230,11 @@ Trocar tudo para `1` ao invés de `2` (mais informações: https://wiki.archlinu
 
 Nas configurações do Firefox, ativar a "Rolagem Automática" (ativa o sistema de rolar com o botão do meio do mouse, igual como é no Windows)
 
-Deixar o terminal bonitin (Power Style)
+### Terminal
 
-`nano ~/.bashrc`
+Eu uso o `fish` para deixar o terminal bonitinho, usando o meu arquivo `fish.config`
 
-(Não se esqueça de remover/comentar o PS1 que já vem por padrão!!)
-
-```bash
-source /etc/environment
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-source /usr/share/bash-completion/completions/git # autocomplete do git similar ao Git Bash do Windows
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
-    . /usr/share/bash-completion/bash_completion
-
-parse_git_branch() {
-    local branch
-    branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-    if [[ -n "$branch" ]]; then
-        # Wrap escape codes and add a color reset at the end.
-        echo -e " \[\e[0;33m\]($branch)\[\e[0m\]"
-    fi
-}
-
-PROMPT_COMMAND=__prompt_command    # Function to generate PS1 after CMDs
-
-__prompt_command() {
-    local EXIT="$?"                # This needs to be first
-    PS1=""
-
-    if [[ $EXIT -eq 0 ]]; then
-        PS1+="\[\e[1;32m\]:) "
-    else
-        PS1+="\[\e[0;31m\]:( "
-    fi
-
-    # Wrap all escape codes and removed a redundant one.
-    PS1+="\[\e[1;32m\]\u@\h\[\e[0;37m\]:\[\e[0;36m\]\w"
-
-    PS1+=$(parse_git_branch)
-
-    # Wrap escape codes and add a final color reset.
-    PS1+="\[\e[0;37m\]\$ \[\e[0m\]"
-}
-```
-
-![media/bash_ps1.png](media/bash_ps1.png)
+Para isso, basta copiar o arquivo para `~/.config/fish/config.fish`
 
 Ativar syntax highlighting no nano
 
