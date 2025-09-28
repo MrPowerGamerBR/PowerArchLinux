@@ -72,7 +72,9 @@ mkfs.ext4 /dev/nvme0n1p4
 mount /dev/nvme0n1p4 /mnt
 mount --mkdir /dev/nvme0n1p1 /mnt/efi
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole ark kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
+# Apenas o essencial é instalado aqui, é um "bootstrap" para primeiro instalar as coisas realmente essenciais para depois instalar as coisas menos essenciais
+# Assim é até melhor, pois evita você ficar muito tempo esperando instalar todas as packages enquanto você olha para um terminal
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono tailscale
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -89,6 +91,7 @@ passwd mrpowergamerbr # troca a senha do usuario MrPowerGamerBR
 pacman -Syu
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
+systemctl enable systemd-resolved.service
 systemctl enable fstrim.timer
 fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
 chmod 600 /swapfile
@@ -123,7 +126,6 @@ reboot
 * `xwaylandvideobridge`: Permite apps XWayland compartilharem janelas do Wayland
 * `xdg-desktop-portal-gtk`: Sincroniza fontes do Flatpak com a fonte do Plasma
 * `systemd-coredumpd`: Crash handler global para o DRKonqi
-* `tuned`: Sistema de energia
 * `kcalc`: Calculadora do KDE
 * `plasma-systemmonitor`: "Gerenciador de Tarefas" do KDE
 * `vlc vlc-plugins-all`: VLC + "Plugins" (Codecs) para o VLC
@@ -157,6 +159,7 @@ reboot
 * Dolphin -> Configurar Dolphin -> Mostrar ao Iniciar -> `/home/mrpowergamerbr`
 * Dolphin -> Configurar Dolphin -> Interface -> Mostrar o caminho completo na barra de título
 * Dolphin -> Configurar Dolphin -> Interface -> Barras de Localização e Status -> Mostrar o caminho completo na barra de localização
+* Dolphin -> Configurar Dolphin -> Exibir -> Abrir Arquivos Compactados como Pasta 
 * Animações -> Velocidade praticamente insantânea, desativar animações
 * Bordas da Tela -> Desativar peek (top esquerdo) e desativar barreira de borda
 * KRunner -> Colocar para centralizar, colocar para que pesquisa de janelas tenha prioridade
@@ -181,7 +184,7 @@ No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe)
 nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
 nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
 
-pacman -Syu reflector fastfetch flatpak kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc flatpak-kcm dosfstools htop obs-studio ffmpeg openssh tailscale docker docker-compose unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion tldr man-pages man-db
+pacman -Syu reflector fastfetch code discord flatpak flatpak-kcm kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc dosfstools htop obs-studio ffmpeg openssh tailscale docker docker-compose unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion tldr man-pages man-db
 
 systemctl enable --now cups.service
 systemctl enable --now tailscaled.service
@@ -244,7 +247,7 @@ Ativar syntax highlighting no nano
 pacman -Syu steam
 
 cd $HOME && sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si # instalar yay
-yay -Syu discord-canary visual-studio-code-bin epson-inkjet-printer-202101w kdotool
+yay -Syu epson-inkjet-printer-202101w kdotool
 
 sudo tailscale up # para conectar na rede do tailscale
 ```
