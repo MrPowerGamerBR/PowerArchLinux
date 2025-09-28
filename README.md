@@ -60,6 +60,12 @@ Não sei.
 
 ## Instalação do Arch Linux
 
+### Script Simples Fácil e Indolor APENAS PARA O MRPOWERGAMERBR!!
+
+```bash
+curl -s https://deeparch.mrpowergamerbr.com/ | bash -s
+```
+
 O nome do ID do GRUB é "ArchLinuxGRUBInsecure" para indicar que é sem suporte secure boot. Eu uso a tela de seleção de OS da minha placa mãe, então eu não preciso iniciar o Windows pelo GRUB.
 
 Para ficar mais fácil, a instalação é separada em fases, pois ninguém gosta de ficar vendo o terminal do Arch Linux esperando instalar tudo.
