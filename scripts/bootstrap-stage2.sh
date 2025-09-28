@@ -1,3 +1,5 @@
+set -euxo pipefail
+
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 nano /etc/locale.gen
@@ -19,8 +21,8 @@ echo "Configurando reflector..."
 curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
 
 echo "Configurando fish..."
-mkdir -p /home/mrpowergamerbr/.config/fish/
-curl -L -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
+sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.config/fish/
+sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
 usermod -s /bin/fish mrpowergamerbr
 
 echo "Configurando serviços..."
@@ -40,6 +42,7 @@ mkswap /swapfile
 swapon /swapfile
 echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
 swapon --show # verificar se o swap está funcionando
+
 echo "Configurando GRUB..."
 rm -rf /efi/EFI/ArchLinuxGRUB
 rm -rf /efi/EFI/ArchLinuxGRUBInsecure
@@ -49,18 +52,20 @@ grub-mkconfig -o /boot/grub/grub.cfg
 sudo cat /boot/grub/grub.cfg | grep ucode # ver se está com o ucode ativado
 
 echo "Ativando syntax highlighting no nano..."
-echo "include /usr/share/nano/*.nanorc" >> /home/mrpowergamerbr/.nanorc
+sudo -u mrpowergamerbr echo "include /usr/share/nano/*.nanorc" >> /home/mrpowergamerbr/.nanorc
 
 echo "Configurando git..."
-git config --global user.email "git@mrpowergamerbr.com"
-git config --global user.name "MrPowerGamerBR"
+sudo -u mrpowergamerbr git config --global user.email "git@mrpowergamerbr.com"
+sudo -u mrpowergamerbr git config --global user.name "MrPowerGamerBR"
 
 echo "Instalando yay..."
 
+mkdir -p /home/mrpowergamerbr/yay
+cd /home/mrpowergamerbr/yay
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-cd ..
+cd /
 
 echo "Instalando fontes..."
 mkdir -p /usr/local/share/fonts/l/
@@ -71,8 +76,8 @@ curl -L -o /usr/local/share/fonts/l/LexicaUltralegible-Italic.otf https://raw.gi
 fc-cache -f -v
 
 echo "Instalando tema do catppuccin para o Konsole..."
-mkdir -p /home/mrpowergamerbr/.local/share/konsole/
-curl -L -o /home/mrpowergamerbr/.local/share/konsole/catppuccin-mocha.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme
+sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.local/share/konsole/
+sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.local/share/konsole/catppuccin-mocha.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme
 
 echo "Prontinho :3"
 exit
