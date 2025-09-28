@@ -21,7 +21,9 @@ curl -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPo
 echo "Configurando fish..."
 mkdir -p /home/mrpowergamerbr/.config/fish/
 curl -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
+usermod -s /bin/fish mrpowergamerbr
 
+echo "Configurando serviços..."
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
 systemctl enable systemd-resolved.service
