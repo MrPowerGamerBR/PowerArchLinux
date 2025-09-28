@@ -60,12 +60,7 @@ sudo -u mrpowergamerbr git config --global user.name "MrPowerGamerBR"
 
 echo "Instalando yay..."
 
-mkdir -p /home/mrpowergamerbr/yay
-cd /home/mrpowergamerbr/yay
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd /
+sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/yay; cd /home/mrpowergamerbr/yay; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
 
 echo "Instalando fontes..."
 mkdir -p /usr/local/share/fonts/l/
@@ -80,4 +75,3 @@ sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.local/share/konsole/
 sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.local/share/konsole/catppuccin-mocha.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme
 
 echo "Prontinho :3"
-exit
