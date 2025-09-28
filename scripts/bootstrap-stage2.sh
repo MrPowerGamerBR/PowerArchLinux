@@ -63,7 +63,7 @@ sudo -u mrpowergamerbr git config --global user.name "MrPowerGamerBR"
 
 echo "Instalando yay..."
 
-sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/yay; cd /home/mrpowergamerbr/yay; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
+sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/; cd /home/mrpowergamerbr/; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
 
 echo "Instalando fontes..."
 mkdir -p /usr/local/share/fonts/l/
