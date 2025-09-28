@@ -20,6 +20,9 @@ nano /etc/pacman.conf
 echo "Configurando reflector..."
 curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
 
+echo "Atualizando pacotes..."
+pacman -Syu
+
 echo "Configurando fish..."
 sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.config/fish/
 sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
@@ -74,4 +77,4 @@ echo "Instalando tema do catppuccin para o Konsole..."
 sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.local/share/konsole/
 sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.local/share/konsole/catppuccin-mocha.colorscheme https://raw.githubusercontent.com/catppuccin/konsole/refs/heads/main/themes/catppuccin-mocha.colorscheme
 
-echo "Prontinho :3"
+echo "Prontinho :3 Divirta-se!"
