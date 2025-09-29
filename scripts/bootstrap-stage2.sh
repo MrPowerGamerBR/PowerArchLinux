@@ -32,6 +32,7 @@ echo "Configurando serviços..."
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
 systemctl enable systemd-resolved.service
+systemctl enable tailscaled.service
 systemctl enable fstrim.timer
 systemctl enable pkgstats.timer
 systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
