@@ -60,6 +60,8 @@ sudo -u mrpowergamerbr echo "include /usr/share/nano/*.nanorc" >> /home/mrpowerg
 echo "Configurando git..."
 sudo -u mrpowergamerbr git config --global user.email "git@mrpowergamerbr.com"
 sudo -u mrpowergamerbr git config --global user.name "MrPowerGamerBR"
+# Usar o ksshaskpass faz o git salvar a senha no wallet do KDE
+sudo -u mrpowergamerbr git config --global core.askPass /usr/bin/ksshaskpass
 
 echo "Instalando yay..."
 
