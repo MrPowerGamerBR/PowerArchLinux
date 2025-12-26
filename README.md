@@ -66,97 +66,7 @@ Não sei.
 curl -s https://deeparch.mrpowergamerbr.com/ | bash -s
 ```
 
-O nome do ID do GRUB é "ArchLinuxGRUBInsecure" para indicar que é sem suporte secure boot. Eu uso a tela de seleção de OS da minha placa mãe, então eu não preciso iniciar o Windows pelo GRUB.
-
-Para ficar mais fácil, a instalação é separada em fases, pois ninguém gosta de ficar vendo o terminal do Arch Linux esperando instalar tudo.
-
-A primeira parte é o "essencial" e depois de instalado, instala o resto.
-
-```bash
-loadkeys br-abnt2
-mkfs.ext4 /dev/nvme0n1p4
-mount /dev/nvme0n1p4 /mnt
-mount --mkdir /dev/nvme0n1p1 /mnt/efi
-reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
-# Apenas o essencial é instalado aqui, é um "bootstrap" para primeiro instalar as coisas realmente essenciais para depois instalar as coisas menos essenciais
-# Assim é até melhor, pois evita você ficar muito tempo esperando instalar todas as packages enquanto você olha para um terminal
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git nvidia-open grub efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono
-genfstab -U /mnt >> /mnt/etc/fstab
-arch-chroot /mnt
-ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-hwclock --systohc
-nano /etc/locale.gen
-locale-gen
-nano /etc/locale.conf # LANG=pt_BR.UTF-8
-nano /etc/vconsole.conf # KEYMAP=br-abnt2
-nano /etc/hostname # hostname da maquina
-passwd # troca a senha do usuario root
-useradd -m -G wheel -s /bin/bash mrpowergamerbr
-visudo # descomentar %wheel ... perto do final (coloca para poder usar sudo sem precisar de senha)
-passwd mrpowergamerbr # troca a senha do usuario MrPowerGamerBR
-pacman -Syu
-systemctl enable NetworkManager.service
-systemctl enable sddm.service
-systemctl enable systemd-resolved.service
-systemctl enable fstrim.timer
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
-nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
-grub-mkconfig -o /boot/grub/grub.cfg
-sudo cat /boot/grub/grub.cfg | grep ucode # ver se está com o ucode ativado
-exit
-
-# desconectar o monitor secundário (para o KDE reconhecer por padrão o monitor principal sem precisar mexer nos painéis manualmente)
-reboot
-```
-
-**Explicação das Packages:**
-* `reflector`: Para poder atualizar mirrors do Arch
-* `cups cups-pdf system-config-printer`: Suporte para impressora
-* `krita`: App de desenho/edição de imagem
-* `inkscape`: App de ilustração SVG
-* `kdialog`: Permite enviar notificações do KDE Plasma pelo terminal
-* `kimageformats`: Adiciona thumbnails no Dolphin para AVIF, JPEG XL, etc
-* `dolphin-plugins`: Adiciona plugins no Dolphin, como montar ISOs
-* `ffmpegthumbs`: Adiciona thumbnails no Dolphin para vídeos
-* `kdeconnect`: KDE Connect, para conectar o celular para poder compartilhar o clipboard e etc
-* `kdegraphics-thumbnailers`: Adiciona thumbnails no Dolphin para PDFs, etc
-* `kio-admin`: Para gerenciar arquivos como administrador (permite clicar com botão direito em uma pasta -> Abrir como administrador)
-* `gwenview`: Visualizador de imagens do KDE
-* `phonon-vlc`: Usado por alguns apps para reprodução de multimídia
-* `xwaylandvideobridge`: Permite apps XWayland compartilharem janelas do Wayland
-* `xdg-desktop-portal-gtk`: Sincroniza fontes do Flatpak com a fonte do Plasma
-* `systemd-coredumpd`: Crash handler global para o DRKonqi
-* `kcalc`: Calculadora do KDE
-* `plasma-systemmonitor`: "Gerenciador de Tarefas" do KDE
-* `vlc vlc-plugins-all`: VLC + "Plugins" (Codecs) para o VLC
-* `flatpak-kcm`: Permite configurar as permissões de apps Flatpak
-* `dosfstools`: Usado para poder editar partições FAT16 no KDE Partition Manager
-* `pkgstats`: Envia estatísticas dos pacotes instalados para o Arch Linux
-* `yt-dlp`: Ferramenta para baixar vídeos do YouTube pelo terminal
-* `wl-clipboard`: Ferramenta para interagir com o clipboard pelo terminal (Wayland)
-* `sshfs`: Ferramenta para montar um servidor SSH como se fosse uma pasta local, também é necessário pelo KDE Connect para montar celulares conectados
-* `pacman-contrib`: Scripts e ferramentas para o pacman, usado para o `paccache.timer`, que automaticamente limpa o cache do pacman 
-* `bash-completion`: Vários arquivos para auto complete para o bash
-* `tldr`: Mostra um resumo de como usar um comando ao usar `tldr`
-* `man-pages man-db`: Manual pelo `man`
-
-**Notas:**
-* `kio-gdrive`: Permite conectar o Google Drive e outros serviços no Dolphin, entretanto não está funcionando devido a problemas no OAuth2 do KDE (https://discuss.kde.org/t/kde-online-accounts-not-signing-in/3411/38)
-* `qt6-imageformats`: Fala que é necessário para ver imagens Webp no Dolphin e no Gwenview, mas na minha experiência ele funciona sem precisar disso.
-* `filelight`: Não funciona bem em GPUs da Nvidia
-* `kcolorchooser`: Color picker, funciona mas seria legal uma alternativa que permite você dar pick sem precisar clicar no botão primeiro
-
 ### Após Reiniciar
-
-#### Ativar Swap
-```bash
-fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
-swapon --show # verificar se o swap está funcionando
-```
 
 * Colocar para dar migalhas de estatísticas/tracking para o KDE Plasma para ajudarem eles com o desenvolvimento <3
 * Monitor -> Escala 150%
@@ -189,26 +99,6 @@ swapon --show # verificar se o swap está funcionando
 * Cores -> Cor de destaque personalizada -> #29a6fe
 
 No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe) com uma senha vazia, para não ficar pedindo o login do user quando abrir o Discord
-
-```bash
-nano /etc/pacman.conf # ativar multilib (para Steam) e ativar Color
-nano /etc/xdg/reflector/reflector.conf # Configurar o Reflector igual a chamada anterior, com country e protocol e rate do Brazil
-
-pacman -Syu reflector fastfetch code discord flatpak flatpak-kcm kimageformats kio-admin dolphin-plugins ffmpegthumbs kdegraphics-thumbnailers phonon-vlc xwaylandvideobridge xdg-desktop-portal-gtk systemd-coredumpd kcalc ksshaskpass kdialog plasma-systemmonitor vlc dosfstools htop obs-studio ffmpeg openssh tailscale docker docker-compose unrar qbittorrent ntfs-3g wine-staging winetricks cups cups-pdf system-config-printer krita inkscape kdeconnect gwenview pkgstats yt-dlp wl-clipboard sshfs vlc-plugins-all bash-completion tldr man-pages man-db
-
-systemctl enable --now cups.service
-systemctl enable --now tailscaled.service
-systemctl enable --now docker.service
-systemctl enable pkgstats.timer
-systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
-systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
-systemctl enable reflector.timer
-
-nano /usr/lib/systemd/user.conf.d/00-process-timeouts.conf # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
-
-[Manager]
-DefaultTimeoutStopSec=5s
-```
 
 Instalar Firefox Nightly em `/opt/firefox-nightly`
 
@@ -388,6 +278,8 @@ sudo pacman -Syu mokutil
 yay -Syu shim-signed
 ```
 
+**PARECE QUE O GRUB TEM ALGUM BUG QUE FAZ ISTO NÃO FUNCIONAR, É MELHOR USAR O SYSTEMD-BOOT:** https://www.reddit.com/r/archlinux/comments/1pvw6td/grub_shimsigned_mokutil_disablevalidation_not/nw1tgk5/
+
 Primeiro instale o grub normalmente, é necessário instalar com os modules desta forma para ter suporte ao SBAT (Secure Boot Advanced Targeting), que o shim precisa para bootar.
 
 ```bash
@@ -433,3 +325,9 @@ Para reverter a verificação do `shim-signed`, você pode usar
 ```bash
 sudo mokutil --enable-validation
 ```
+
+## Partiação ESP muito pequena
+
+Por padrão, o Windows cria uma partição ESP de apenas 100MB, o que é MUITO pequeno.
+
+A solução que eu fiz foi criar outra partição ESP (de 1GB) no mesmo disco apenas para o Linux. Tem gente que fala que tem BIOS que não gostam disso, mas eu consegui fazer sem nenhum problema. E a BIOS reconhece o bootloader do Windows (que está na primeira partição ESP) tanto o bootloader do Linux (que está nas segunda partição ESP)

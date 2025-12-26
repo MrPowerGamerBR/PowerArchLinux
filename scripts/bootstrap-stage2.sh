@@ -1,12 +1,14 @@
 set -euxo pipefail
 
+ROOT_UUID=$(blkid -s UUID -o value /dev/nvme0n1p6)
+
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 nano /etc/locale.gen
 locale-gen
-echo "LANG=pt_BR.UTF-8" >> /etc/locale.conf
-echo "KEYMAP=br-abnt2" >> /etc/vconsole.conf
-echo "deeparch-whistler" >> /etc/hostname # hostname da maquina
+echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
+echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
+echo "deeparch-whistler" > /etc/hostname # hostname da maquina
 echo "Senha Root:"
 passwd # troca a senha do usuario root
 useradd -m -G wheel -s /bin/bash mrpowergamerbr
@@ -29,6 +31,7 @@ sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.config/fish/config.fish 
 usermod -s /bin/fish mrpowergamerbr
 
 echo "Configurando serviços..."
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl enable NetworkManager.service
 systemctl enable sddm.service
 systemctl enable systemd-resolved.service
@@ -47,16 +50,28 @@ swapon /swapfile
 echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
 swapon --show # verificar se o swap está funcionando
 
-echo "Configurando GRUB..."
-rm -rf /efi/EFI/ArchLinuxGRUB
-rm -rf /efi/EFI/ArchLinuxGRUBInsecure
-grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=ArchLinuxGRUBInsecure
-nano /etc/default/grub # 1280x720 no DISPLAY e tirar quiet
-grub-mkconfig -o /boot/grub/grub.cfg
-sudo cat /boot/grub/grub.cfg | grep ucode # ver se está com o ucode ativado
+echo "Configurando systemd-boot..."
+rm -rf /boot/EFI/systemd
+rm -rf /boot/loader
+bootctl install
+mkdir -p /boot/loader/entries
+
+cat > /boot/loader/loader.conf <<EOF
+default arch.conf
+timeout 3
+editor no
+EOF
+
+cat > /boot/loader/entries/arch.conf <<EOF
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /amd-ucode.img
+initrd  /initramfs-linux.img
+options root=UUID=$ROOT_UUID rw
+EOF
 
 echo "Ativando syntax highlighting no nano..."
-sudo -u mrpowergamerbr echo "include /usr/share/nano/*.nanorc" >> /home/mrpowergamerbr/.nanorc
+sudo -u mrpowergamerbr bash -c 'echo "include /usr/share/nano/*.nanorc" >> ~/.nanorc'
 
 echo "Configurando git..."
 sudo -u mrpowergamerbr git config --global user.email "git@mrpowergamerbr.com"
@@ -67,6 +82,19 @@ sudo -u mrpowergamerbr git config --global core.askPass /usr/bin/ksshaskpass
 echo "Instalando yay..."
 
 sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/; cd /home/mrpowergamerbr/; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
+
+echo "Instalando shim-manager para Secure Boot..."
+sudo -u mrpowergamerbr yay -S shim-manager
+rm -rf /boot/EFI/systemd-shim
+cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI/systemd-shim/
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Shim)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
+cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
+
+echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
+cat > /usr/lib/systemd/user.conf.d/00-process-timeouts.conf <<EOF
+[Manager]
+DefaultTimeoutStopSec=5s
+EOF
 
 echo "Instalando fontes..."
 mkdir -p /usr/local/share/fonts/l/
