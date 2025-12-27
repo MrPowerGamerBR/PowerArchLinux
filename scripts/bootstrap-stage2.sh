@@ -78,16 +78,20 @@ sudo -u mrpowergamerbr git config --global user.name "MrPowerGamerBR"
 # Usar o ksshaskpass faz o git salvar a senha no wallet do KDE
 sudo -u mrpowergamerbr git config --global core.askPass /usr/bin/ksshaskpass
 
+# A gente não pode usar arch-chroot -S justamente porque o yay falha dentro do -S
 echo "Instalando yay..."
-
 sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/; cd /home/mrpowergamerbr/; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
 
 echo "Instalando shim-manager para Secure Boot..."
 sudo -u mrpowergamerbr yay -S shim-manager
 rm -rf /boot/EFI/systemd-shim
 cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI/systemd-shim/
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
+# Sim, o nome precisa ser grubx64
 cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
+
+echo "Criando entradas UEFI..."
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager" --loader '\EFI\SYSTEMD\SYSTEM-BOOTX64.efi'
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
 
 echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
 cat > /usr/lib/systemd/user.conf.d/00-process-timeouts.conf <<EOF
