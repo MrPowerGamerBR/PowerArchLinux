@@ -95,6 +95,7 @@ efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager" --
 efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
 
 echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
+mkdir -p /usr/lib/systemd/user.conf.d/
 cat > /usr/lib/systemd/user.conf.d/00-process-timeouts.conf <<EOF
 [Manager]
 DefaultTimeoutStopSec=5s
