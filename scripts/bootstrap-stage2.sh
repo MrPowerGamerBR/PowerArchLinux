@@ -82,9 +82,10 @@ sudo -u mrpowergamerbr git config --global core.askPass /usr/bin/ksshaskpass
 echo "Instalando yay..."
 sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/; cd /home/mrpowergamerbr/; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
 
-echo "Instalando shim-manager para Secure Boot..."
-sudo -u mrpowergamerbr yay -S shim-manager
+echo "Instalando shim-signed para Secure Boot..."
+sudo -u mrpowergamerbr yay -S shim-signed
 rm -rf /boot/EFI/systemd-shim
+mkdir -p /boot/EFI/systemd-shim
 cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI/systemd-shim/
 # Sim, o nome precisa ser grubx64
 cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
