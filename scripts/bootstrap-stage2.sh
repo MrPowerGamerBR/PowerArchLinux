@@ -41,10 +41,6 @@ systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
 systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
 systemctl enable reflector.timer
 
-echo "Configurando resolv.conf para usar o systemd-resolved..."
-rm /etc/resolv.conf
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-
 echo "Configurando swap..."
 fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
 chmod 600 /swapfile
