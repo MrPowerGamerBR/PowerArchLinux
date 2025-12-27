@@ -6,6 +6,11 @@ mount --mkdir /dev/nvme0n1p4 /mnt/boot
 echo "Atualizando mirrors..."
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
 
+echo "Excluindo kernel antigo..."
+rm /mnt/boot/amd-ucode.img
+rm /mnt/boot/initramfs-linux.img
+rm /mnt/boot/vmlinuz-linux
+
 # Apenas o essencial é instalado aqui, é um "bootstrap" para primeiro instalar as coisas realmente essenciais para depois instalar as coisas menos essenciais
 # Assim é até melhor, pois evita você ficar muito tempo esperando instalar todas as packages enquanto você olha para um terminal
 echo "Instalando pacotes (bootstrap)..."
