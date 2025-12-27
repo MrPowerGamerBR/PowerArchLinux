@@ -22,5 +22,5 @@ pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode n
 genfstab -U /mnt >> /mnt/etc/fstab
 
 curl -L -o /mnt/bootstrap-stage2.sh https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/scripts/bootstrap-stage2.sh
-echo "Rode o script /bootstrap-stage2.sh dentro do \"arch-chroot -S /mnt\" para continuar :3"
+echo "Rode o script /bootstrap-stage2.sh dentro do \"arch-chroot /mnt\" para continuar :3"
 arch-chroot /mnt
