@@ -87,7 +87,7 @@ echo "Instalando shim-manager para Secure Boot..."
 sudo -u mrpowergamerbr yay -S shim-manager
 rm -rf /boot/EFI/systemd-shim
 cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI/systemd-shim/
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Shim)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
 cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
 
 echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
