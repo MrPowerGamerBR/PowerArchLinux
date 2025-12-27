@@ -91,8 +91,9 @@ cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI
 cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
 
 echo "Criando entradas UEFI..."
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager" --loader '\EFI\SYSTEMD\SYSTEM-BOOTX64.efi'
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
+# part = qual partição está (neste caso é /dev/nvme0n1p4)
+efibootmgr --create --disk /dev/nvme0n1 --part 4 --label "Linux Boot Manager" --loader '\EFI\SYSTEMD\SYSTEM-BOOTX64.efi'
+efibootmgr --create --disk /dev/nvme0n1 --part 4 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
 
 echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
 mkdir -p /usr/lib/systemd/user.conf.d/
