@@ -1,7 +1,11 @@
 loadkeys br-abnt2
-mkfs.ext4 /dev/nvme0n1p6
-mount /dev/nvme0n1p6 /mnt
-mount --mkdir /dev/nvme0n1p4 /mnt/boot
+
+read -p "Partição do Arch Linux (Exemplo: /dev/nvme0n1p6): " ARCH_PARTITION
+read -p "Partição EFI (Exemplo: /dev/nvme0n1p4): " EFI_PARTITION
+
+mkfs.ext4 $ARCH_PARTITION
+mount $ARCH_PARTITION /mnt
+mount --mkdir $EFI_PARTITION /mnt/boot
 
 echo "Atualizando mirrors..."
 reflector --country Brazil --protocol http,https --sort rate --fastest 2 --save /etc/pacman.d/mirrorlist
