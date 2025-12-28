@@ -5,7 +5,7 @@ lsblk
 read -p "Partição do Arch Linux (Exemplo: /dev/nvme0n1p6): " ARCH_PARTITION
 read -p "Partição EFI (Exemplo: /dev/nvme0n1p4): " EFI_PARTITION
 read -p "Disco EFI (Exemplo: /dev/nvme0n1): " EFI_DISK
-read -p "Index da Partição EFI (Exemplo: 1) " EFI_PARTITION_ID
+read -p "Index da Partição EFI (Exemplo: 1, é o último número da partição EFI) " EFI_PARTITION_ID
 
 mkfs.ext4 $ARCH_PARTITION
 mount $ARCH_PARTITION /mnt
@@ -18,6 +18,8 @@ echo "Excluindo kernel antigo..."
 rm /mnt/boot/amd-ucode.img
 rm /mnt/boot/initramfs-linux.img
 rm /mnt/boot/vmlinuz-linux
+
+sudo sed -i "/\[multilib\]/,/Include/s/^#//" /etc/pacman.conf
 
 # Apenas o essencial é instalado aqui, é um "bootstrap" para primeiro instalar as coisas realmente essenciais para depois instalar as coisas menos essenciais
 # Assim é até melhor, pois evita você ficar muito tempo esperando instalar todas as packages enquanto você olha para um terminal
@@ -106,8 +108,11 @@ pkgs=(
     lzop
     unarchiver
     unrar
+    # Steam
+    steam
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon
+    lib32-vulkan-radeon
 )
 
 pacstrap -K /mnt "${pkgs[@]}"
