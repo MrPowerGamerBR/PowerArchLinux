@@ -28,7 +28,9 @@ pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode n
     # Adds useful features to Dolphin (like right click on a ISO file -> Mount)
     dolphin-plugins \
     # Compressor/Decompressor that integrates nicely in Dolphin
-    ark
+    ark \
+    # Vulkan Driver for AMD Radeon GPUs
+    vulkan-radeon lib32-vulkan-radeon
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
