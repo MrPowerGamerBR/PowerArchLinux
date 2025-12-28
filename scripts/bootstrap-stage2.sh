@@ -13,7 +13,9 @@ echo "deeparch-whistler" > /etc/hostname # hostname da maquina
 echo "Senha Root:"
 passwd # troca a senha do usuario root
 useradd -m -G wheel -s /bin/bash mrpowergamerbr
-visudo # descomentar %wheel ... perto do final (coloca para poder usar sudo sem precisar de senha)
+# coloca para poder usar sudo sem precisar de senha
+mkdir -p /etc/sudoers.d/
+echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel_nopasswd
 echo "Senha MrPowerGamerBR:"
 passwd mrpowergamerbr # troca a senha do usuario MrPowerGamerBR
 
