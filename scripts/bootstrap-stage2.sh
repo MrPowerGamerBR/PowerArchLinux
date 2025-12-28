@@ -20,7 +20,8 @@ echo "Senha MrPowerGamerBR:"
 passwd mrpowergamerbr # troca a senha do usuario MrPowerGamerBR
 
 echo "Ativando multilib e color no pacman..."
-nano /etc/pacman.conf
+sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
+sudo sed -i "/\[multilib\]/,/Include/s/^#//" /etc/pacman.conf
 
 echo "Configurando reflector..."
 curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
@@ -106,13 +107,36 @@ cat > /usr/lib/systemd/user.conf.d/00-process-timeouts.conf <<EOF
 DefaultTimeoutStopSec=5s
 EOF
 
-echo "Instalando fontes..."
+# https://community.kde.org/Distributions/Packaging_Recommendations#Polkit_configuration
+echo "Configurando regras do polkit para timezones..."
+mkdir -p /usr/share/polkit-1/rules.d/
+cat > /usr/share/polkit-1/rules.d/00-ntp-and-time-zones.rules <<EOF
+// Allow current user or their system services to change the system time zone and time synchronization
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.timedate1.set-timezone" || action.id == "org.freedesktop.timedate1.set-ntp") && subject.active) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+
+echo "Instalando e configurando fontes..."
 mkdir -p /usr/local/share/fonts/l/
 curl -L -o /usr/local/share/fonts/l/LexicaUltralegible-Regular.otf https://raw.githubusercontent.com/jacobxperez/lexica-ultralegible/refs/heads/main/fonts/otf/LexicaUltralegible-Regular.otf
 curl -L -o /usr/local/share/fonts/l/LexicaUltralegible-Bold.otf https://raw.githubusercontent.com/jacobxperez/lexica-ultralegible/refs/heads/main/fonts/otf/LexicaUltralegible-Bold.otf 
 curl -L -o /usr/local/share/fonts/l/LexicaUltralegible-BoldItalic.otf https://raw.githubusercontent.com/jacobxperez/lexica-ultralegible/refs/heads/main/fonts/otf/LexicaUltralegible-BoldItalic.otf 
 curl -L -o /usr/local/share/fonts/l/LexicaUltralegible-Italic.otf https://raw.githubusercontent.com/jacobxperez/lexica-ultralegible/refs/heads/main/fonts/otf/LexicaUltralegible-Italic.otf
 fc-cache -f -v
+
+# These settings are in ~/.config/kdeglobals
+MAIN_FONT="Lexica Ultralegible,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
+FIXED_FONT="JetBrains Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
+SMALL_FONT="Lexica Ultralegible,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1"
+
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key font "$MAIN_FONT"
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key menuFont "$MAIN_FONT"
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key toolBarFont "$MAIN_FONT"
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key fixed "$FIXED_FONT"
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key smallestReadableFont "$SMALL_FONT"
 
 echo "Instalando tema do catppuccin para o Konsole..."
 sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.local/share/konsole/
