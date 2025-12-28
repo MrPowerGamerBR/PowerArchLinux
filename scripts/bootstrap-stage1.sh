@@ -80,16 +80,14 @@ pkgs=(
     vlc
     vlc-plugins-all
     # Use VLC as a backend for Phonon
-    phonon-vlc
+    phonon-qt6-vlc
     # KDE recommends this for tray icons
     libappindicator
     # Adds supports for webp & others, allows Dolphin to display thumbnails for these formats
-    qt-imageformats
+    qt6-imageformats
     # Printer things
-    system-config-printer-applet
-    system-config-printer-dbus-service
-    # Global crash handler for drkonqi
-    systemd-coredumpd
+    cups
+    system-config-printer
     # Compressor/Decompressor that integrates nicely in Dolphin (+ plugins)
     # (by default ark seems to be able to compress via 7zip, but it just fails silently if you don't have 7zip installed)
     # unarchiver provides rar decompression, but we also use unrar because unrar provides a CLI tool for rar extraction
@@ -102,7 +100,6 @@ pkgs=(
     unrar
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon
-    lib32-vulkan-radeon
 )
 
 pacstrap -K /mnt "${pkgs[@]}"
