@@ -4,7 +4,8 @@ ROOT_UUID=$(blkid -s UUID -o value /dev/nvme0n1p6)
 
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
-nano /etc/locale.gen
+sudo sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+sudo sed -i 's/^# *pt_BR.UTF-8 UTF-8/pt_BR.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
 echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
@@ -83,7 +84,7 @@ echo "Instalando yay..."
 sudo -u mrpowergamerbr bash -c 'mkdir -p /home/mrpowergamerbr/; cd /home/mrpowergamerbr/; git clone https://aur.archlinux.org/yay.git; cd yay; makepkg -si; cd /'
 
 echo "Instalando shim-signed para Secure Boot..."
-sudo -u mrpowergamerbr yay -S shim-signed
+sudo -u mrpowergamerbr yay -S shim-signed --noconfirm
 rm -rf /boot/EFI/systemd-shim
 mkdir -p /boot/EFI/systemd-shim
 cp /usr/share/shim-signed/mmx64.efi /usr/share/shim-signed/shimx64.efi /boot/EFI/systemd-shim/

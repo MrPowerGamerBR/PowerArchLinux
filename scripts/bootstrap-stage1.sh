@@ -18,7 +18,18 @@ echo "Instalando pacotes (bootstrap)..."
 # PACKAGE DESCRIPTIONS:
 # dolphin-plugins: Adds useful features to Dolphin (like right click on a ISO file -> Mount)
 # ark: Compressor/Decompressor
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system dolphin-plugins sddm konsole kwalletmanager fish reflector pkgstats screen tailscale fastfetch discord flatpak flatpak-kcm htop ntfs-3g qbittorrent dosfstools openssh ksshaskpass noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono ark
+pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager fish reflector pkgstats screen tailscale fastfetch discord flatpak flatpak-kcm htop ntfs-3g qbittorrent dosfstools openssh ksshaskpass noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono \
+    # Has "hostname" command
+    inetutils \
+    # Useful for network debugging
+    traceroute \
+    # Useful for network debugging
+    mtr \
+    # Adds useful features to Dolphin (like right click on a ISO file -> Mount)
+    dolphin-plugins \
+    # Compressor/Decompressor that integrates nicely in Dolphin
+    ark
+
 genfstab -U /mnt >> /mnt/etc/fstab
 
 curl -L -o /mnt/bootstrap-stage2.sh https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/scripts/bootstrap-stage2.sh
