@@ -43,7 +43,7 @@ systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title
 systemctl enable reflector.timer
 
 echo "Configurando swap..."
-fallocate -l 32G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
+fallocate -l 16G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -62,12 +62,13 @@ timeout 3
 editor no
 EOF
 
+# We use zswap because it is technically "good" when the system is using a lot of RAM, even if you have a lot of RAM like I do (32GBs)
 cat > /boot/loader/entries/arch.conf <<EOF
 title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
-options root=UUID=$ROOT_UUID rw
+options root=UUID=$ROOT_UUID rw zswap.enabled=1 zswap.compressor=zstd zswap.zpool=zsmalloc
 EOF
 
 echo "Ativando syntax highlighting no nano..."
