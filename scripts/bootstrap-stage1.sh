@@ -1,7 +1,11 @@
 loadkeys br-abnt2
 
+lsblk
+
 read -p "Partição do Arch Linux (Exemplo: /dev/nvme0n1p6): " ARCH_PARTITION
 read -p "Partição EFI (Exemplo: /dev/nvme0n1p4): " EFI_PARTITION
+read -p "Disco EFI (Exemplo: /dev/nvme0n1): " EFI_DISK
+read -p "Index da Partição EFI (Exemplo: 1) " EFI_PARTITION_ID
 
 mkfs.ext4 $ARCH_PARTITION
 mount $ARCH_PARTITION /mnt
@@ -109,6 +113,11 @@ pkgs=(
 pacstrap -K /mnt "${pkgs[@]}"
 
 genfstab -U /mnt >> /mnt/etc/fstab
+
+echo "ARCH_PARTITION=$ARCH_PARTITION" >> /mnt/.powerarch_install_vars
+echo "EFI_PARTITION=$EFI_PARTITION" >> /mnt/.powerarch_install_vars
+echo "EFI_DISK=$EFI_DISK" >> /mnt/.powerarch_install_vars
+echo "EFI_PARTITION_ID=$EFI_PARTITION_ID" >> /mnt/.powerarch_install_vars
 
 curl -L -o /mnt/bootstrap-stage2.sh https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/scripts/bootstrap-stage2.sh
 echo "Rode o script /bootstrap-stage2.sh dentro do \"arch-chroot /mnt\" para continuar :3"

@@ -1,6 +1,8 @@
 set -euxo pipefail
 
-ROOT_UUID=$(blkid -s UUID -o value /dev/nvme0n1p6)
+source .powerarch_install_vars
+
+ROOT_UUID=$(blkid -s UUID -o value $ARCH_PARTITION)
 
 ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
@@ -97,8 +99,8 @@ cp /boot/EFI/systemd/systemd-bootx64.efi /boot/EFI/systemd-shim/grubx64.efi
 
 echo "Criando entradas UEFI..."
 # part = qual partição está (neste caso é /dev/nvme0n1p4)
-efibootmgr --create --disk /dev/nvme0n1 --part 4 --label "Linux Boot Manager" --loader '\EFI\SYSTEMD\SYSTEMD-BOOTX64.efi'
-efibootmgr --create --disk /dev/nvme0n1 --part 4 --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
+efibootmgr --create --disk $EFI_DISK --part $EFI_PARTITION_ID --label "Linux Boot Manager" --loader '\EFI\SYSTEMD\SYSTEMD-BOOTX64.efi'
+efibootmgr --create --disk $EFI_DISK --part $EFI_PARTITION_ID --label "Linux Boot Manager (Secure Boot)" --loader '\EFI\SYSTEMD-SHIM\SHIMX64.efi'
 
 echo "Diminuindo timeout do systemd..." # para diminuir o timeout padrão (120s) do systemd, é bom para quando tem um app "locked up" na hora de desligar
 mkdir -p /usr/lib/systemd/user.conf.d/
