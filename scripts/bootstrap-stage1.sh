@@ -16,39 +16,96 @@ rm /mnt/boot/vmlinuz-linux
 echo "Instalando pacotes (bootstrap)..."
 
 # Recommended KDE packages (not EVERYTHING is actually useful, but it is a good pointer): https://community.kde.org/Distributions/Packaging_Recommendations
-pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode nano networkmanager git efibootmgr vi vim sudo curl wget zip unzip less rsync firefox plasma-meta kde-system sddm konsole kwalletmanager fish reflector pkgstats screen tailscale fastfetch discord flatpak flatpak-kcm htop ntfs-3g qbittorrent dosfstools openssh ksshaskpass noto-fonts noto-fonts-extra noto-fonts-cjk noto-fonts-emoji ttf-jetbrains-mono \
+pkgs=(
+    base
+    base-devel
+    linux
+    linux-firmware
+    pacman-contrib
+    amd-ucode
+    nano
+    networkmanager
+    git
+    efibootmgr
+    vi
+    vim
+    sudo
+    curl
+    wget
+    zip
+    unzip
+    less
+    rsync
+    firefox
+    plasma-meta
+    kde-system
+    sddm
+    konsole
+    kwalletmanager
+    fish
+    reflector
+    pkgstats
+    screen
+    tailscale
+    fastfetch
+    discord
+    flatpak
+    flatpak-kcm
+    htop
+    ntfs-3g
+    qbittorrent
+    dosfstools
+    openssh
+    ksshaskpass
+    noto-fonts
+    noto-fonts-extra
+    noto-fonts-cjk
+    noto-fonts-emoji
+    ttf-jetbrains-mono
     # Has "hostname" command
-    inetutils \
+    inetutils
     # Useful for network debugging
-    traceroute \
+    traceroute
     # Useful for network debugging
-    mtr \
+    mtr
     # Adds useful features to Dolphin (like right click on a ISO file -> Mount)
-    dolphin-plugins \
+    dolphin-plugins
     # Video thumbnails in Dolphin
-    ffmpegthumbs \
+    ffmpegthumbs
     # KDE Connect
-    kdeconnect \
+    kdeconnect
     # PDF thumbnails & others in Dolphin
-    kdegraphics-thumbnailers \
+    kdegraphics-thumbnailers
     # VLC + codec plugins
-    vlc vlc-plugins-all \
+    vlc
+    vlc-plugins-all
     # Use VLC as a backend for Phonon
-    phonon-vlc \
+    phonon-vlc
     # KDE recommends this for tray icons
-    libappindicator \
+    libappindicator
     # Adds supports for webp & others, allows Dolphin to display thumbnails for these formats
-    qt-imageformats \
+    qt-imageformats
     # Printer things
-    system-config-printer-applet system-config-printer-dbus-service \
+    system-config-printer-applet
+    system-config-printer-dbus-service
     # Global crash handler for drkonqi
-    systemd-coredumpd \
+    systemd-coredumpd
     # Compressor/Decompressor that integrates nicely in Dolphin (+ plugins)
     # (by default ark seems to be able to compress via 7zip, but it just fails silently if you don't have 7zip installed)
     # unarchiver provides rar decompression, but we also use unrar because unrar provides a CLI tool for rar extraction
-    ark 7zip arj lrzip lzop unarchiver unrar \
+    ark
+    7zip
+    arj
+    lrzip
+    lzop
+    unarchiver
+    unrar
     # Vulkan Driver for AMD Radeon GPUs
-    vulkan-radeon lib32-vulkan-radeon
+    vulkan-radeon
+    lib32-vulkan-radeon
+)
+
+pacstrap -K /mnt "${pkgs[@]}"
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
