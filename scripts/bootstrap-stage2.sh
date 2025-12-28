@@ -137,6 +137,7 @@ sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key men
 sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key toolBarFont "$MAIN_FONT"
 sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key fixed "$FIXED_FONT"
 sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group General --key smallestReadableFont "$SMALL_FONT"
+sudo -u mrpowergamerbr kwriteconfig6 --file kdeglobals --group WM --key activeFont "$MAIN_FONT"
 
 echo "Instalando tema do catppuccin para o Konsole..."
 sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.local/share/konsole/
