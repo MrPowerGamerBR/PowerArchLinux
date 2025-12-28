@@ -45,7 +45,8 @@ pacstrap -K /mnt base base-devel linux linux-firmware pacman-contrib amd-ucode n
     systemd-coredumpd \
     # Compressor/Decompressor that integrates nicely in Dolphin (+ plugins)
     # (by default ark seems to be able to compress via 7zip, but it just fails silently if you don't have 7zip installed)
-    ark 7zip arj lrzip lzop unarchiver \
+    # unarchiver provides rar decompression, but we also use unrar because unrar provides a CLI tool for rar extraction
+    ark 7zip arj lrzip lzop unarchiver unrar \
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon lib32-vulkan-radeon
 
