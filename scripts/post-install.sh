@@ -2,7 +2,7 @@ echo "Configurando resolv.conf para usar o systemd-resolved..."
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 echo "Instalando Firefox Nightly..."
-sudo curl -L -o /tmp/firefox.tar.xz https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=pt-BR
+sudo curl -L -o /tmp/firefox.tar.xz "https://download.mozilla.org/?product=firefox-nightly-latest-l10n-ssl&os=linux64&lang=pt-BR"
 sudo tar -xvf /tmp/firefox.tar.xz -C /opt
 sudo mv /opt/firefox /opt/firefox-nightly
 sudo rm -rf /tmp/firefox.tar.xz
@@ -24,7 +24,7 @@ StartupWMClass=firefox-nightly
 EOF
 
 echo "Instalando o IntelliJ IDEA Ultimate..."
-sudo curl -L -o /tmp/idea.tar.gz https://download.jetbrains.com/idea/idea-2025.3.1.tar.gz
+sudo curl -L -o /tmp/idea.tar.gz "https://download.jetbrains.com/idea/idea-2025.3.1.tar.gz"
 sudo tar -xvf /tmp/idea.tar.gz -C /opt
 sudo rm -rf /tmp/idea.tar.gz
 
@@ -32,6 +32,7 @@ echo "Instalando packages adicionais..."
 # DESCRIÇÕES DAS PACKAGES
 # Steam: steam xd
 # wl-clipboard: Ferramenta para interagir com o clipboard pelo terminal
+# A gente não usa "--noconfirm" aqui pois o pacman/yay pode pedir para instalar packages que possuem várias variações (tipo o Vulkan driver), então é melhor ver e aprovar qual é o melhor 
 sudo pacman -Syu steam
 
 # libunity: Sistema de badge de notificações que o Discord usa
