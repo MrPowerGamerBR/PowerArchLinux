@@ -97,7 +97,8 @@ curl -s https://deeparch.mrpowergamerbr.com/ | bash -s
 * Ativar o KWin de minimizar tudo no "Scripts do KWin", configurar para Win + D no app de "Atalhos"
     * Para mim isso é mais natural que a tecla padrão de "espiar desktop", pois o "espiar desktop" não faz as janelas maximizarem novamente ao clicar em qualquer uma delas
 * Cores -> Cor de destaque personalizada -> #29a6fe
-
+* Notificações do Sistema -> Ativar som do "Início de Sessão" pois hmm eu amo sound effects quando inicia uma sessão
+* 
 No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe) com uma senha vazia, para não ficar pedindo o login do user quando abrir o Discord
 
 Instalar Firefox Nightly em `/opt/firefox-nightly`
