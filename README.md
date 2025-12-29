@@ -98,7 +98,9 @@ curl -s https://deeparch.mrpowergamerbr.com/ | bash -s
     * Para mim isso é mais natural que a tecla padrão de "espiar desktop", pois o "espiar desktop" não faz as janelas maximizarem novamente ao clicar em qualquer uma delas
 * Cores -> Cor de destaque personalizada -> #29a6fe
 * Notificações do Sistema -> Ativar som do "Início de Sessão" pois hmm eu amo sound effects quando inicia uma sessão
-* 
+* Comportamento Geral -> Desativar "Clique do meio" para desativar o middle click to paste
+* Comportamento Geral -> Desativar "Dicas de ferramentas para painéis e widgets" para desativar a janela de preview do painel da taskbar ao manter o mouse em cima dela
+
 No KWalletManager, criar uma wallet (ou trocar a senha da wallet que já existe) com uma senha vazia, para não ficar pedindo o login do user quando abrir o Discord
 
 Instalar Firefox Nightly em `/opt/firefox-nightly`
