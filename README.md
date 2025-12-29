@@ -121,7 +121,7 @@ StartupWMClass=firefox-nightly
 
 Configurar Firefox Nightly para ser o browser padrão nas configs do KDE (a opção de browser padrão que o Nightly oferece não funciona)
 
-No Firefox `about:config`, ative para usar o XDG Desktop Portals (para usar o file picker do QT que é bem melhor que o do GTK):
+No Firefox `about:config`, ative (ativar = colocar `1` ao invés de `2`) para usar o XDG Desktop Portals (para usar o file picker do QT que é bem melhor que o do GTK):
 
 * widget.use-xdg-desktop-portal.file-picker – Whether to use XDG portal for the file picker
 * widget.use-xdg-desktop-portal.mime-handler – Whether to use XDG portal for the mime handler
