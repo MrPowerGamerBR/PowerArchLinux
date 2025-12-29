@@ -129,6 +129,13 @@ No Firefox `about:config`, ative para usar o XDG Desktop Portals (para usar o fi
 * widget.use-xdg-desktop-portal.location – Whether to use XDG portal for geolocation
 * widget.use-xdg-desktop-portal.open-uri – Whether to use XDG portal for opening to a file
 
+Outras configurações do Firefox:
+* middlemouse.paste -> false - Desativa middle click to paste no Firefox
+* browser.tabs.hoverPreview.enabled -> false - Retira o preview de tabs do Firefox (toda hora eu sem querer clico na preview ao invés de clicar na página)
+* browser.tabs.groups.hoverPreview.enabled -> false - Mesma coisa de cima, mas para group tabs
+* media.hardwaremediakeys.enabled -> false - Com a extensão do Plasma Integration instalado no Firefox, é melhor deixar desativado para não dar conflito com as media keys (https://community.kde.org/Distributions/Packaging_Recommendations)
+* widget.gtk.rounded-bottom-corners.enabled -> true - Deixa as bordas de baixo arredondadas, para ficarem semelhantes ao tema padrão do KDE Plasma (https://community.kde.org/Distributions/Packaging_Recommendations)
+  
 Trocar tudo para `1` ao invés de `2` (mais informações: https://wiki.archlinux.org/title/Firefox#XDG_Desktop_Portal_integration)
 
 Nas configurações do Firefox, ativar a "Rolagem Automática" (ativa o sistema de rolar com o botão do meio do mouse, igual como é no Windows)
