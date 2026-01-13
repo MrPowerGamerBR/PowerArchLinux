@@ -31,11 +31,6 @@ curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/M
 echo "Atualizando pacotes..."
 pacman -Syu
 
-echo "Configurando fish..."
-sudo -u mrpowergamerbr mkdir -p /home/mrpowergamerbr/.config/fish/
-sudo -u mrpowergamerbr curl -L -o /home/mrpowergamerbr/.config/fish/config.fish https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/fish.config
-usermod -s /bin/fish mrpowergamerbr
-
 echo "Configurando serviços..."
 systemctl enable NetworkManager.service
 systemctl enable sddm.service

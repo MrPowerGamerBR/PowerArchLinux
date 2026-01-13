@@ -52,7 +52,6 @@ pkgs=(
     sddm
     konsole
     kwalletmanager
-    fish
     reflector
     pkgstats
     screen
