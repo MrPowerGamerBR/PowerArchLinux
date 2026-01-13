@@ -29,13 +29,10 @@ sudo tar -xvf /tmp/idea.tar.gz -C /opt
 sudo rm -rf /tmp/idea.tar.gz
 
 echo "Instalando packages adicionais..."
-# DESCRIÇÕES DAS PACKAGES
-# Steam: steam xd
-# wl-clipboard: Ferramenta para interagir com o clipboard pelo terminal
-# A gente não usa "--noconfirm" aqui pois o pacman/yay pode pedir para instalar packages que possuem várias variações (tipo o Vulkan driver), então é melhor ver e aprovar qual é o melhor 
-sudo pacman -Syu steam zed
 
 # libunity: Sistema de badge de notificações que o Discord usa
 # kdotool-git: Ferramenta para interagir com o KDE Plasma pelo terminal (é usado o -git pois o kdotool normal não está funcionando devido a mudanças no Rust)
-# visual-studio-code-bin: Visual Studio Code
-yay -Syu libunity kdotool-git
+# epson-inkjet-printer-202101w: Driver de impressora EPSON L3210
+# bin2iso: Converte BIN para ISO
+# minecraft-launcher: Launcher do Minecraft
+yay -Syu libunity kdotool-git epson-inkjet-printer-202101w minecraft-launcher

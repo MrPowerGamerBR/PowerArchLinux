@@ -97,6 +97,8 @@ pkgs=(
     # Printer things
     cups
     system-config-printer
+    # Useful to see which files are occupying too much space
+    filelight
     # Compressor/Decompressor that integrates nicely in Dolphin (+ plugins)
     # (by default ark seems to be able to compress via 7zip, but it just fails silently if you don't have 7zip installed)
     # unarchiver provides rar decompression, but we also use unrar because unrar provides a CLI tool for rar extraction
@@ -107,8 +109,11 @@ pkgs=(
     lzop
     unarchiver
     unrar
-    # Steam
+    # Gaming related things
     steam
+    mangohud
+    # Useful for automation
+    wl-clipboard
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon
     lib32-vulkan-radeon
