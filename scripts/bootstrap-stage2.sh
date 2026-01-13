@@ -25,6 +25,17 @@ echo "Ativando multilib e color no pacman..."
 sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 sudo sed -i "/\[multilib\]/,/Include/s/^#//" /etc/pacman.conf
 
+NOEXTRACT_LINES=(
+    "NoExtract = usr/lib/binfmt.d/wine.conf"
+    "NoExtract = usr/share/applications/wine.desktop"
+)
+
+for line in "${NOEXTRACT_LINES[@]}"; do
+    if ! grep -qF "$line" "/etc/pacman.conf"; then
+        sed -i "/^\[options\]/a $line" "/etc/pacman.conf"
+    fi
+done
+
 echo "Configurando reflector..."
 curl -L -o /etc/xdg/reflector/reflector.conf https://raw.githubusercontent.com/MrPowerGamerBR/PowerArchLinux/refs/heads/main/reflector.conf
 
