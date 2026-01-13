@@ -24,7 +24,7 @@ StartupWMClass=firefox-nightly
 EOF
 
 echo "Instalando o IntelliJ IDEA Ultimate..."
-sudo curl -L -o /tmp/idea.tar.gz "https://download.jetbrains.com/idea/idea-2025.3.1.tar.gz"
+sudo curl -L -o /tmp/idea.tar.gz "https://download.jetbrains.com/product?code=IIU&latest&distribution=linux"
 sudo tar -xvf /tmp/idea.tar.gz -C /opt
 sudo rm -rf /tmp/idea.tar.gz
 
