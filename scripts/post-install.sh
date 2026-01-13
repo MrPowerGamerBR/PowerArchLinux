@@ -33,9 +33,9 @@ echo "Instalando packages adicionais..."
 # Steam: steam xd
 # wl-clipboard: Ferramenta para interagir com o clipboard pelo terminal
 # A gente não usa "--noconfirm" aqui pois o pacman/yay pode pedir para instalar packages que possuem várias variações (tipo o Vulkan driver), então é melhor ver e aprovar qual é o melhor 
-sudo pacman -Syu steam
+sudo pacman -Syu steam zed
 
 # libunity: Sistema de badge de notificações que o Discord usa
 # kdotool-git: Ferramenta para interagir com o KDE Plasma pelo terminal (é usado o -git pois o kdotool normal não está funcionando devido a mudanças no Rust)
 # visual-studio-code-bin: Visual Studio Code
-yay -Syu libunity kdotool-git visual-studio-code-bin
+yay -Syu libunity kdotool-git
