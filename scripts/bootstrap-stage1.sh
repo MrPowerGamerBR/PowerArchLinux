@@ -113,6 +113,9 @@ pkgs=(
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon
     lib32-vulkan-radeon
+    # Printer Things
+    system-config-printer
+    cups
 )
 
 pacstrap -K /mnt "${pkgs[@]}"
