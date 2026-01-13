@@ -46,6 +46,7 @@ systemctl enable pkgstats.timer
 systemctl enable paccache.timer # Limpa o cache do pacman periodicamente
 systemctl enable pacman-filesdb-refresh.timer # https://wiki.archlinux.org/title/Pacman#Querying_package_databases
 systemctl enable reflector.timer
+systemctl enable cups.service
 
 echo "Configurando swap..."
 fallocate -l 16G /swapfile # adicionar swap file (é bom ter para evitar programas morrendo ao usar mais memória do que você tem)
