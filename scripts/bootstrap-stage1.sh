@@ -114,6 +114,7 @@ pkgs=(
     mangohud
     # Useful for automation
     wl-clipboard
+    kdialog
     # Vulkan Driver for AMD Radeon GPUs
     vulkan-radeon
     lib32-vulkan-radeon
